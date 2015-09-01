@@ -15,7 +15,22 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
   padding: 0.2em 0;
 }
 
+.word-container {
+  max-width: 500px;
+  margin: 0 auto;
+  font-size: 2em;
+}
 
+.character {
+  padding: 5px;
+  background-color: grey;
+}
+
+.user-input-container {
+  .user-input {
+    visibility: hidden;
+  }
+}
 
 // injector
 // endinjector
