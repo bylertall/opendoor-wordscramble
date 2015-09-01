@@ -6,48 +6,21 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController(wordService) {
+  function MainController($document, $timeout, wordService) {
     var vm = this;
 
-    function getWord() {
-      wordService.getNewWord()
-        .success(
-        function(data) {
-          vm.word = data.word;
-          vm.scrambledWord = scramble(vm.word);
-        }).error(
-        function(data) {
-          console.log('An error occurred when getting the word');
-          console.log(data);
-        }
-      );
-    }
+    vm.wordService = wordService;
+    vm.word = vm.wordService.word;
+    vm.scrambledArray = vm.wordService.scrambledArray;
+    vm.userInput = vm.wordService.userInput;
 
-    function scramble(word) {
-      var array = word.toUpperCase().split(''),
-        counter = array.length,
-        temp,
-        i;
+    // bind keydown event and check if character has a match in scramble array
+    $document.bind('keydown', function(keyEvent) {
+      var timer;
 
-      // scramble letters (REMEMBER CONCEPT: Fisher-Yates shuffle)
-      while (counter) {
-
-        // integer to select random array index
-        i = Math.floor(Math.random() * counter--);
-
-        // item at end of initial array is set to temp
-        temp = array[counter];
-
-        // random array item is set at current counter position of array
-        array[counter] = array[i];
-
-        //  move temp to the random array index
-        array[i] = temp;
-      }
-
-      return array;
-    }
-
-    getWord();
+      $timeout(function() {
+        vm.wordService.checkUserInput(keyEvent);
+      });
+    });
   }
 })();

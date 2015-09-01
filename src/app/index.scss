@@ -15,9 +15,10 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
   padding: 0.2em 0;
 }
 
-.word-container {
+.word-container, .user-input-container {
   max-width: 500px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 2em;
 }
 
@@ -27,9 +28,7 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
 }
 
 .user-input-container {
-  .user-input {
-    visibility: hidden;
-  }
+  margin-top: 40px;
 }
 
 // injector

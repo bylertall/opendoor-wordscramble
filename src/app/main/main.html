@@ -8,10 +8,12 @@
 
     <!-- Show scrambled word -->
     <div class="row word-container">
-      <div class="col-sm-2 text-center" ng-repeat="character in main.scrambledWord track by $index">
+      <div class="col-sm-2 text-center" ng-repeat="character in main.scrambledArray track by $index">
         <div class="character">{{character}}</div>
       </div>
     </div>
+
+  </div>
 
     <!-- Show user input -->
     <div class="row user-input-container">
@@ -27,6 +29,5 @@
       <!-- TODO: score directive -->
       <score></score>
     </div>
-  </div>
 
 </div>

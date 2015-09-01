@@ -11,10 +11,18 @@
       .state('home', {
         url: '/',
         templateUrl: 'app/main/main.html',
-        controller: 'MainController as main'
+        controller: 'MainController as main',
+        resolve: {
+          wordPrep: wordPrep
+        }
       });
 
     $urlRouterProvider.otherwise('/');
+  }
+
+  /** @ngInject */
+  function wordPrep(wordService) {
+    return wordService.getNewWord();
   }
 
 })();
