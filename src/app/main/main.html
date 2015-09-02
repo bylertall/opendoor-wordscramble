@@ -1,21 +1,22 @@
 <div class="container-fluid">
 
-  <div class="row jumbotron text-center">
-    <h1>Opendoor Wordgame</h1>
+  <div class="row header text-center">
+    <h1 class="title col-xs-12">Scrambled Words</h1>
+    <img class="scramble-logo col-xs-6 col-xs-offset-3 col-md-offset-4 col-md-4" src="./assets/scramble.png">
   </div>
 
   <div class="content-container">
 
     <!-- Show user input -->
     <div class="word-container user-input">
-      <div class="col-sm-2 character-container text-center" ng-repeat="character in main.userInput track by $index">
+      <div class="col-xs-2 character-container text-center" ng-repeat="character in main.userInput track by $index">
         <div class="guess character">{{character}}</div>
       </div>
     </div>
 
     <!-- Show scrambled word -->
-    <div class="word-container">
-      <div class="col-sm-2 character-container text-center" ng-repeat="character in main.scrambledArray track by $index">
+    <div class="word-container scrambled-word">
+      <div class="col-xs-2 scramble-fade character-container text-center" ng-repeat="character in main.scrambledArray track by $index">
         <div class="character">{{character}}</div>
       </div>
     </div>
