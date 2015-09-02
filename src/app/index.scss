@@ -15,16 +15,31 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
   padding: 0.2em 0;
 }
 
-.word-container, .user-input-container {
+.content-container {
+  position: relative;
+}
+
+.word-container {
+  position: relative;
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
   font-size: 2em;
-}
 
-.character {
-  padding: 5px;
-  background-color: grey;
+  .character-container {
+    display: inline-block;
+    max-width: 500px;
+    margin: 0 auto;
+
+    .character {
+      padding: 5px;
+      background-color: grey;
+    }
+
+    .guess.character {
+      background-color: red;
+    }
+  }
 }
 
 .user-input-container {
