@@ -36,10 +36,14 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
       background-color: grey;
     }
 
-    .guess.character {
+    .guess {
       background-color: red;
     }
   }
+}
+
+.win .guess {
+  background-color: green !important;
 }
 
 .user-input-container {

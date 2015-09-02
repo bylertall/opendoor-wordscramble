@@ -9,13 +9,16 @@
   function wordService($http) {
     var apiBase = 'http://api.wordnik.com:80/v4/words.json/',
         apiWordEnd = 'randomWord?hasDictionaryDef=true&includePartOfSpeech=noun&excludePartOfSpeech=proper-noun&minCorpusCount=0&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=6&maxLength=6&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5',
+        apiDictionaryStart = 'reverseDictionary?query=',
+        apiDictionaryEnd = '&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=10&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5',
         factory = {
           word: '',
           wordArray: [],
           scrambledArray: [],
           userInput: [],
           getNewWord: getNewWord,
-          checkUserInput: checkUserInput
+          checkUserInput: checkUserInput,
+          winner: false
         };
 
     function getNewWord() {
@@ -25,7 +28,7 @@
 
 
       function getWordComplete(data) {
-        factory.word = data.word;
+        factory.word = data.word.toLowerCase();
         factory.wordArray = factory.word.toUpperCase().split('');
         factory.scrambledArray = scramble(factory.wordArray);
 
@@ -77,34 +80,80 @@
 
         // remove last element from userInput, push into scrambledArray
         factory.scrambledArray.push(factory.userInput.pop());
-
-
-        //angular.copy(factory.userInput);
-        //angular.copy(factory.scrambledArray);
-
         return;
+      }
+
+      // string character of key that was pressed (returns in uppercase)
+      char = String.fromCharCode(keyEvent.keyCode);
+
+      // index of char in scrambledArray
+      charIndex = factory.scrambledArray.indexOf(char);
+
+      // if char is found, splice out of scramble array and add to userInput array
+      if (charIndex !== -1) {
+
+        temp = factory.scrambledArray.splice(charIndex, 1);
+        factory.userInput.push(temp[0]);
+
+        console.log(factory.userInput);
+        console.log(factory.scrambledArray);
+        console.log(factory);
+      }
+
+      // check user guess when scrambledArray is empty
+      if (!factory.scrambledArray.length) {
+        checkGuess(factory.userInput);
+      }
+    }
+
+    function checkGuess(array) {
+      var userGuess = array.join('').toLowerCase();
+
+      // check if userGuess matches word
+      // if yes, user wins
+      // if not, check dictionary
+      if (userGuess === factory.word) {
+        factory.winner = true;
+        correctGuess();
 
       } else {
-        // string character of key that was pressed (returns in uppercase)
-        char = String.fromCharCode(keyEvent.keyCode);
-
-        // index of char in scrambledArray
-        charIndex = factory.scrambledArray.indexOf(char);
-
-        // if char is found, splice out of scramble array and add to userInput array
-        if (charIndex !== -1) {
-
-          temp = factory.scrambledArray.splice(charIndex, 1);
-          factory.userInput.push(temp[0]);
-
-          //angular.copy(factory.userInput);
-          //angular.copy(factory.scrambledArray);
-
-          console.log(factory.userInput);
-          console.log(factory.scrambledArray);
-          console.log(factory);
-        }
+        checkDictionary(userGuess);
       }
+    }
+
+    function checkDictionary(word) {
+      return $http.get(apiBase + apiDictionaryStart + word + apiDictionaryEnd)
+        .success(checkDictionarySuccess)
+        .error(checkDictionaryError);
+
+      function checkDictionarySuccess(data) {
+        console.log(data);
+        // if dictionary check returns results, user wins
+        // otherwise user loses
+        if (data.totalResults) {
+          return correctGuess();
+        }
+
+        incorrectGuess();
+      }
+
+      function checkDictionaryError(data) {
+        console.log('Error! Couldn\'t check the dictionary');
+        console.log(data);
+      }
+    }
+
+    function correctGuess() {
+      // add 'win' class to show user they won
+      var elGuessChars = angular.element(document.querySelector('.user-input'));
+      elGuessChars.addClass('win');
+    }
+
+    function incorrectGuess() {
+      // userInput array items moved to scrambledArray (reset so user may guess again)
+      angular.copy(factory.userInput, factory.scrambledArray);
+      // empty userInput
+      angular.copy([], factory.userInput);
     }
 
     return factory;
