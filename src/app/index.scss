@@ -26,7 +26,6 @@ html, body {
 
 .site-container {
   height: 100%;
-  margin-bottom: 100px;
 }
 
 // header
@@ -66,6 +65,7 @@ html, body {
 // content
 .word-container {
   max-width: 500px;
+  min-height: 85px;
   margin: 40px auto 0;
   font-size: 2em;
 
