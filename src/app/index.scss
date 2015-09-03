@@ -24,6 +24,10 @@ html, body {
   background-color: $color-purple;
 }
 
+.site-container {
+  height: 100%;
+}
+
 // header
 .header {
 
@@ -129,6 +133,23 @@ html, body {
         color: $color-red;
       }
     }
+  }
+}
+
+footer {
+  min-width: 300px;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #FFF;
+  font-size: 1.2em;
+  font-weight: 100;
+  text-align: center;
+  letter-spacing: 1px;
+
+  a {
+    color: $color-yellow;
   }
 }
 
