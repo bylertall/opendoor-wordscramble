@@ -41,8 +41,6 @@
         angular.copy(scramble(factory.wordArray), factory.scrambledArray);
 
         elGuessChars.removeClass('win');
-
-        console.log(factory.word);
       }
 
       function getWordError(data) {
@@ -95,7 +93,6 @@
 
         // enter key
         case 13:
-          console.log(factory);
           if (factory.isWinner) {
             // if user has won and hits enter, start new game
             return getNewWord();
