@@ -41,7 +41,6 @@
         angular.copy(scramble(factory.wordArray), factory.scrambledArray);
 
         elGuessChars.removeClass('win');
-        console.log(data);
       }
 
       function getWordError(data) {
