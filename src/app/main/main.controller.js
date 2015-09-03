@@ -39,13 +39,7 @@
 
       // timeout here triggers digest so that values from wordService update in controller
       $timeout(function() {
-        // only check result if user has NOT won
-        if (!vm.wordService.isWinner) {
-          vm.wordService.checkUserInput(keyEvent);
-        } else if (keyEvent.which === 13) {
-          // if user has won and hits enter, start new game
-          vm.wordService.getNewWord();
-        }
+        vm.wordService.checkUserInput(keyEvent);
       });
     });
   }

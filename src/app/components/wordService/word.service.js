@@ -93,6 +93,14 @@
           }
           break;
 
+        case 13:
+          console.log(factory);
+          if (factory.isWinner) {
+            // if user has won and hits enter, start new game
+            return getNewWord();
+          }
+          break;
+
         // CTRL + S: skip word
         // get new word, multiplier back to 1
         case 19:
@@ -175,7 +183,7 @@
 
       $timeout(function() {
         // scramble userInput array items then copy to scrambledArray (reset so user may guess again)
-        angular.copy(scramble(factory.userInput), factory.scrambledArray);
+        angular.copy(scramble(factory.wordArray), factory.scrambledArray);
         // empty userInput
         angular.copy([], factory.userInput);
 
