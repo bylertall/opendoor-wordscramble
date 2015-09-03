@@ -117,14 +117,14 @@ html, body {
   position: relative;
   height: 265px;
   width: 265px;
-  margin: 0 auto 35px;
+  margin: -70px auto 35px;
   border: 1px solid #FFF;
   border-radius: 50%;
   background-color: $color-yellow;
 
   .win-panel-inner {
     position: relative;
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
     color: $color-purple;
 

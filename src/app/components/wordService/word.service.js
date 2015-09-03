@@ -41,6 +41,8 @@
         angular.copy(scramble(factory.wordArray), factory.scrambledArray);
 
         elGuessChars.removeClass('win');
+
+        console.log(factory.word);
       }
 
       function getWordError(data) {
@@ -75,25 +77,40 @@
 
     function checkUserInput(keyEvent) {
       var char,
-        charIndex,
+        charIndex = -1,
         temp;
 
       // if delete was pressed & userInput is not empty
       // remove last item in userInput and return new userInput array
       // otherwise set index of character that was pressed
-      if (keyEvent.which === 8 && factory.userInput.length) {
+      switch (keyEvent.which) {
+        // enter key
+        case 8:
+          console.log('Delete pressed!');
+          if (factory.userInput.length) {
+            // remove last element from userInput, push into scrambledArray
+            factory.scrambledArray.push(factory.userInput.pop());
+          }
+          break;
 
-        // remove last element from userInput, push into scrambledArray
-        factory.scrambledArray.push(factory.userInput.pop());
-        return;
+        // CTRL + S: skip word
+        // get new word, multiplier back to 1
+        case 19:
+          if (keyEvent.ctrlKey) {
+            getNewWord();
+            factory.multiplier = 1;
+          }
+          break;
+
+        // handle all other character input
+        default:
+          // string character of key that was pressed
+          // returns in lowercase, need uppercase to match scrambledArray
+          char = String.fromCharCode(keyEvent.charCode).toUpperCase();
+
+          // index of char in scrambledArray
+          charIndex = factory.scrambledArray.indexOf(char);
       }
-
-      // string character of key that was pressed
-      // returns in lowercase, need uppercase to match scrambledArray
-      char = String.fromCharCode(keyEvent.charCode).toUpperCase();
-
-      // index of char in scrambledArray
-      charIndex = factory.scrambledArray.indexOf(char);
 
       // if char is found, splice out of scramble array and add to userInput array
       if (charIndex !== -1) {
