@@ -19,6 +19,7 @@
 
     // bind keyup event and check if character has a match in scramble array
     $document.bind('keyup', function(keyEvent) {
+      console.log(keyEvent);
       // timeout here triggers digest so that values from wordService update in controller
       $timeout(function() {
         // only check result if user has NOT won

@@ -3,10 +3,11 @@
  *  The list of variables are listed here bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss
  */
 $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
-$color-purple: rgba(128, 138, 255, 0.6);
+$color-purple: #949CFF;
 $color-yellow: #FFF47E;
 $color-red: #FF7E89;
 $color-green: #89FF7E;
+$color-grey: #A1A2A4;
 
 // bower:scss
 // endbower
@@ -37,6 +38,24 @@ html, body {
     font-weight: 300;
     color: #FFF;
   }
+
+  // player-stats
+  .player-stats-container {
+    position: relative;
+    top: 15px;
+    color: #FFF;
+    font-size: 1.3em;
+    font-weight: 100;
+
+    .player-stats {
+      display: inline-block;
+    }
+
+    .divider {
+
+    }
+  }
+
 }
 
 // content
@@ -49,38 +68,42 @@ html, body {
     max-width: 500px;
     margin: 0 auto;
     padding: 0 5px;
-
-    .character {
-      background-color: #A1A2A4;
-      color: #FFF;
-      font-weight: 300;
-      border: 2px solid #FFF;
-      border-radius: 5px;
-      padding: 7px 5px;
-    }
-
-    .guess {
-      background-color: $color-yellow;
-    }
   }
 }
 
-// win style
-.win .guess {
-  background-color: $color-green !important;
+.character {
+  background-color: $color-grey;
+  color: #FFF;
+  font-weight: 300;
+  border: 2px solid #FFF;
+  border-radius: 5px;
+  padding: 7px 5px;
 }
 
-// incorrect guess style
-.lose .guess {
-  background-color: $color-red !important;
-  border: 2px solid $color-red !important;
+.guess {
+  background-color: $color-yellow;
+  border-color: $color-yellow;
+  color: $color-purple;
 }
+
+.win .character {
+  background-color: $color-green;
+  border-color: #FFF;
+  color: #FFF;
+}
+
+.lose .character {
+  background-color: $color-red;
+  border-color: $color-red;
+  color: #FFF;
+}
+
 
 // win-panel
 .win-panel-outer {
   position: relative;
-  height: 275px;
-  width: 275px;
+  height: 265px;
+  width: 265px;
   margin: 0 auto 35px;
   border: 1px solid #FFF;
   border-radius: 50%;
@@ -88,13 +111,14 @@ html, body {
 
   .win-panel-inner {
     position: relative;
-    top: 53.5%;
+    top: 50%;
     transform: translateY(-50%);
     color: $color-purple;
 
     .win-title {
       margin: 0 auto 15px;
-      font-size: 3em;
+      max-width: 75%;
+      font-size: 3.3em;
     }
 
     .win-text {

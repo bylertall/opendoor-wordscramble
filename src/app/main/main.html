@@ -2,7 +2,15 @@
 
   <div class="row header text-center">
     <h1 class="title col-xs-12">Scrambled Words</h1>
-    <img class="scramble-logo col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4" src="assets/scramble.png">
+
+    <!-- Score -->
+    <div class="player-stats-container">
+      <div class="player-stats score"><span class="score-count">{{main.wordService.score}}</span><span class="score-title"> points</span></div>
+      <span class="divider"> | </span>
+      <div class="player-stats multiplier"><span class="multiplier-count">{{main.wordService.multiplier}}</span><span class="multiplier-title">x multiplier</span></div>
+    </div>
+
+    <img class="scramble-logo col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4" src="assets/scramble.png">
   </div>
 
   <div class="content-container">
@@ -28,12 +36,5 @@
         <div class="character">{{character}}</div>
       </div>
     </div>
-
-    <!-- Score -->
-    <div class="row info">
-      <!-- TODO: score directive -->
-      <score></score>
-    </div>
-
   </div>
 </div>

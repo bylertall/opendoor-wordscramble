@@ -19,7 +19,8 @@
           getNewWord: getNewWord,
           checkUserInput: checkUserInput,
           isWinner: false,
-          score: 0
+          score: 0,
+          multiplier: 1
         };
 
     function getNewWord() {
@@ -144,6 +145,8 @@
       // add 'win' class to show user they won
       elGuessChars.addClass('win');
       factory.isWinner = true;
+      factory.score += 5 * factory.multiplier;
+      factory.multiplier += 1;
 
       return true;
     }
