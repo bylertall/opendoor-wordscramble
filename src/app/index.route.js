@@ -11,18 +11,9 @@
       .state('home', {
         url: '/',
         templateUrl: 'app/main/main.html',
-        controller: 'MainController as main',
-        resolve: {
-          wordPrep: wordPrep
-        }
+        controller: 'MainController as main'
       });
 
     $urlRouterProvider.otherwise('/');
   }
-
-  /** @ngInject */
-  function wordPrep(wordService) {
-    return wordService.getNewWord();
-  }
-
 })();

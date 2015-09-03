@@ -3,7 +3,10 @@
  *  The list of variables are listed here bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss
  */
 $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
-
+$color-purple: rgba(128, 138, 255, 0.6);
+$color-yellow: #FFF47E;
+$color-red: #FF7E89;
+$color-green: #89FF7E;
 
 // bower:scss
 // endbower
@@ -17,16 +20,15 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
 
 html, body {
   height: 100vh;
-  background-color: rgba(128, 138, 255, 0.6);
+  background-color: $color-purple;
 }
 
 // header
 .header {
-  margin-bottom: 40px;
 
   .scramble-logo {
     margin-top: 50px;
-    margin-bottom: 75px;
+    margin-bottom: 35px;
   }
 
   .title {
@@ -40,8 +42,7 @@ html, body {
 // content
 .word-container {
   max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 40px auto 0;
   font-size: 2em;
 
   .character-container {
@@ -59,14 +60,52 @@ html, body {
     }
 
     .guess {
-      background-color: #FFF47E;
+      background-color: $color-yellow;
     }
   }
 }
 
 // win style
 .win .guess {
-  background-color: #89FF7E !important;
+  background-color: $color-green !important;
+}
+
+// incorrect guess style
+.lose .guess {
+  background-color: $color-red !important;
+  border: 2px solid $color-red !important;
+}
+
+// win-panel
+.win-panel-outer {
+  position: relative;
+  height: 275px;
+  width: 275px;
+  margin: 0 auto 35px;
+  border: 1px solid #FFF;
+  border-radius: 50%;
+  background-color: $color-yellow;
+
+  .win-panel-inner {
+    position: relative;
+    top: 53.5%;
+    transform: translateY(-50%);
+    color: $color-purple;
+
+    .win-title {
+      margin: 0 auto 15px;
+      font-size: 3em;
+    }
+
+    .win-text {
+      width: 75%;
+      margin: 5px auto 0;
+      font-size: 1.45em;
+      span {
+        color: $color-red;
+      }
+    }
+  }
 }
 
 // animations
@@ -81,7 +120,7 @@ html, body {
 }
 
 .view-fade.ng-leave {
-  transition: 500ms linear all;
+  transition: 150ms linear all;
   opacity:1;
 }
 .view-fade.ng-leave.ng-leave-active {
@@ -90,7 +129,8 @@ html, body {
 
 /* Fade for enter of scramble letters*/
 .scramble-fade.ng-enter {
-  transition: 750ms linear all;
+  transition: 250ms linear all;
+  transition-delay: 15ms;
   opacity:0;
 }
 
@@ -99,7 +139,7 @@ html, body {
 }
 
 .scramble-fade.ng-enter-stagger {
-  transition-delay: 250ms;
+  transition-delay: 75ms;
   transition-duration: 0ms;
 }
 

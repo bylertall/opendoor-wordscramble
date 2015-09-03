@@ -2,28 +2,35 @@
 
   <div class="row header text-center">
     <h1 class="title col-xs-12">Scrambled Words</h1>
-    <img class="scramble-logo col-xs-6 col-xs-offset-3 col-md-offset-4 col-md-4" src="./assets/scramble.png">
+    <img class="scramble-logo col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4" src="assets/scramble.png">
   </div>
 
   <div class="content-container">
 
+    <!-- Panel to show on win -->
+    <div class="view-fade win-panel-outer" ng-if="main.wordService.isWinner">
+      <div class="win-panel-inner">
+        <h2 class="text-center win-title">YOU WON!</h2>
+        <div class="text-center win-text">Press <span>ENTER</span> to start a new game...</div>
+      </div>
+    </div>
+
     <!-- Show user input -->
     <div class="word-container user-input">
-      <div class="col-xs-2 character-container text-center" ng-repeat="character in main.userInput track by $index">
+      <div class="col-xs-2 character-container text-center" ng-repeat="character in main.wordService.userInput track by $index">
         <div class="guess character">{{character}}</div>
       </div>
     </div>
 
     <!-- Show scrambled word -->
     <div class="word-container scrambled-word">
-      <div class="col-xs-2 scramble-fade character-container text-center" ng-repeat="character in main.scrambledArray track by $index">
+      <div class="col-xs-2 scramble-fade character-container text-center" ng-repeat="character in main.wordService.scrambledArray track by $index">
         <div class="character">{{character}}</div>
       </div>
     </div>
 
-    <!-- Score & timer -->
+    <!-- Score -->
     <div class="row info">
-
       <!-- TODO: score directive -->
       <score></score>
     </div>

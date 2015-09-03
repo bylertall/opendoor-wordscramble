@@ -6,11 +6,11 @@
     .factory('wordService', wordService);
 
   /** @ngInject */
-  function wordService($http) {
+  function wordService($http, $timeout) {
     var apiBase = 'http://api.wordnik.com:80/v4/words.json/',
-        apiWordEnd = 'randomWord?hasDictionaryDef=true&includePartOfSpeech=noun&excludePartOfSpeech=proper-noun&minCorpusCount=0&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=6&maxLength=6&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5',
+        apiWordEnd = 'randomWord?hasDictionaryDef=true&includePartOfSpeech=noun&excludePartOfSpeech=proper-noun,noun-posessive&minCorpusCount=10000&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=6&maxLength=6&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5',
         apiDictionaryStart = 'reverseDictionary?query=',
-        apiDictionaryEnd = '&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=10&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5',
+        apiDictionaryEnd = '&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=1&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5',
         factory = {
           word: '',
           wordArray: [],
@@ -18,7 +18,8 @@
           userInput: [],
           getNewWord: getNewWord,
           checkUserInput: checkUserInput,
-          winner: false
+          isWinner: false,
+          score: 0
         };
 
     function getNewWord() {
@@ -28,19 +29,23 @@
 
 
       function getWordComplete(data) {
-        factory.word = data.word.toLowerCase();
-        factory.wordArray = factory.word.toUpperCase().split('');
-        factory.scrambledArray = scramble(factory.wordArray);
+        var elGuessChars = angular.element(document.querySelector('.user-input'));
 
+        // reset isWinner and userInput to start new game, also remove win class
+        factory.isWinner = false;
+        angular.copy([], factory.userInput);
+
+        factory.word = data.word.toLowerCase();
+        angular.copy(factory.word.toUpperCase().split(''), factory.wordArray);
+        angular.copy(scramble(factory.wordArray), factory.scrambledArray);
+
+        elGuessChars.removeClass('win');
         console.log(data);
-        console.log(factory);
-        return;
       }
 
       function getWordError(data) {
         console.log('A random word could not be retrieved!');
         console.log(data);
-        return;
       }
     }
 
@@ -84,7 +89,7 @@
       }
 
       // string character of key that was pressed (returns in uppercase)
-      char = String.fromCharCode(keyEvent.keyCode);
+      char = String.fromCharCode(keyEvent.which);
 
       // index of char in scrambledArray
       charIndex = factory.scrambledArray.indexOf(char);
@@ -94,28 +99,20 @@
 
         temp = factory.scrambledArray.splice(charIndex, 1);
         factory.userInput.push(temp[0]);
-
-        console.log(factory.userInput);
-        console.log(factory.scrambledArray);
-        console.log(factory);
       }
 
-      // check user guess when scrambledArray is empty
+      // when scrambledArray is empty, check user guess
       if (!factory.scrambledArray.length) {
-        checkGuess(factory.userInput);
+        checkGuess(factory.userInput.join('').toLowerCase());
       }
     }
 
-    function checkGuess(array) {
-      var userGuess = array.join('').toLowerCase();
-
-      // check if userGuess matches word
+    function checkGuess(userGuess) {
+      // check if userGuess matches factory.word
       // if yes, user wins
       // if not, check dictionary
       if (userGuess === factory.word) {
-        factory.winner = true;
-        correctGuess();
-
+        correctGuessHandler();
       } else {
         checkDictionary(userGuess);
       }
@@ -127,14 +124,13 @@
         .error(checkDictionaryError);
 
       function checkDictionarySuccess(data) {
-        console.log(data);
         // if dictionary check returns results, user wins
         // otherwise user loses
         if (data.totalResults) {
-          return correctGuess();
+          correctGuessHandler();
+        } else {
+          incorrectGuessHandler();
         }
-
-        incorrectGuess();
       }
 
       function checkDictionaryError(data) {
@@ -143,17 +139,30 @@
       }
     }
 
-    function correctGuess() {
-      // add 'win' class to show user they won
+    function correctGuessHandler() {
       var elGuessChars = angular.element(document.querySelector('.user-input'));
+      // add 'win' class to show user they won
       elGuessChars.addClass('win');
+      factory.isWinner = true;
+
+      return true;
     }
 
-    function incorrectGuess() {
-      // userInput array items moved to scrambledArray (reset so user may guess again)
-      angular.copy(factory.userInput, factory.scrambledArray);
-      // empty userInput
-      angular.copy([], factory.userInput);
+    function incorrectGuessHandler() {
+      var elGuessChars = angular.element(document.querySelector('.user-input'));
+      // add 'lose' class to indicate wrong answer
+      elGuessChars.addClass('lose');
+
+      $timeout(function() {
+        // scramble userInput array items then copy to scrambledArray (reset so user may guess again)
+        angular.copy(scramble(factory.userInput), factory.scrambledArray);
+        // empty userInput
+        angular.copy([], factory.userInput);
+
+        elGuessChars.removeClass('lose');
+      }, 500);
+
+      return false;
     }
 
     return factory;
