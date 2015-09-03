@@ -68,22 +68,23 @@ html, body {
 
 // content
 .content-container {
+  margin-top: 40px;
   min-height: 100px;
 }
 
 .word-container {
   max-width: 500px;
-  margin: 40px auto 0;
+  margin: 0 auto;
   font-size: 2em;
 
   .character-container {
-    max-width: 500px;
     margin: 0 auto;
     padding: 0 5px;
   }
 }
 
 .character {
+  height: 60px;
   background-color: $color-grey;
   color: #FFF;
   font-weight: 300;

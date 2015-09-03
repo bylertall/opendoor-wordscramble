@@ -18,9 +18,9 @@
     }, 1000);
 
     // bind keyup event and check if character has a match in scramble array
-    $document.bind('keydown', function(keyEvent) {
+    $document.bind('keypress', function(keyEvent) {
+      console.log(keyEvent);
       if (keyEvent.which === 8) {
-        console.log(keyEvent);
         keyEvent.preventDefault();
       }
       // timeout here triggers digest so that values from wordService update in controller

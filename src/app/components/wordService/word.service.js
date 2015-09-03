@@ -88,8 +88,9 @@
         return;
       }
 
-      // string character of key that was pressed (returns in uppercase)
-      char = String.fromCharCode(keyEvent.which);
+      // string character of key that was pressed
+      // returns in lowercase, need uppercase to match scrambledArray
+      char = String.fromCharCode(keyEvent.charCode).toUpperCase();
 
       // index of char in scrambledArray
       charIndex = factory.scrambledArray.indexOf(char);
