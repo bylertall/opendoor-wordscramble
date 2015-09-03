@@ -26,6 +26,7 @@ html, body {
 
 .site-container {
   height: 100%;
+  margin-bottom: 100px;
 }
 
 // header
@@ -138,7 +139,7 @@ html, body {
 
 footer {
   min-width: 300px;
-  position: absolute;
+  position: fixed;
   bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
