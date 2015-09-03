@@ -24,13 +24,10 @@
       if (keyEvent.which === 8) {
         keyEvent.preventDefault();
 
-        // if user has not won, run check input to delete last char
-        if (!vm.wordService.isWinner) {
-          // timeout here triggers digest so that values from wordService update in controller
-          $timeout(function() {
-            vm.wordService.checkUserInput(keyEvent);
-          });
-        }
+        // timeout here triggers digest so that values from wordService update in controller
+        $timeout(function() {
+          vm.wordService.checkUserInput(keyEvent);
+        });
       }
     });
 

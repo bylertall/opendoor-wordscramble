@@ -84,15 +84,16 @@
       // remove last item in userInput and return new userInput array
       // otherwise set index of character that was pressed
       switch (keyEvent.which) {
-        // enter key
+        // delete key
         case 8:
-          console.log('Delete pressed!');
-          if (factory.userInput.length) {
+          // if userInput is not empty and user has not won
+          if (factory.userInput.length && !factory.isWinner) {
             // remove last element from userInput, push into scrambledArray
             factory.scrambledArray.push(factory.userInput.pop());
           }
           break;
 
+        // enter key
         case 13:
           console.log(factory);
           if (factory.isWinner) {
