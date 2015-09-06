@@ -20,7 +20,7 @@ $color-grey: #A1A2A4;
 }
 
 html, body {
-  height: 100vh;
+  height: 100%;
   background-color: $color-purple;
 }
 
@@ -36,8 +36,9 @@ html, body {
 .header {
 
   .scramble-logo {
-    margin-top: 50px;
-    margin-bottom: 35px;
+    margin: 50px auto 35px;
+    width: 80%;
+    max-width: 450px;
   }
 
   .title {
@@ -115,16 +116,16 @@ html, body {
 // win-panel
 .win-panel-outer {
   position: relative;
-  height: 265px;
-  width: 265px;
-  margin: -70px auto 35px;
+  height: 245px;
+  width: 245px;
+  margin: -120px auto 35px;
   border: 1px solid #FFF;
   border-radius: 50%;
   background-color: $color-yellow;
 
   .win-panel-inner {
     position: relative;
-    top: 45%;
+    top: 46.5%;
     transform: translateY(-50%);
     color: $color-purple;
 
