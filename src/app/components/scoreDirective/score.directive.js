@@ -10,8 +10,12 @@
       restrict: 'AE',
       replace: true,
       templateUrl: 'app/components/scoreDirective/score.html',
-      scope: {},
-      controller: 'ScoreController as score'
+
+      // score & multiplier values are given to attributes in od-score directive element
+      scope: {
+        'playerScore': '@',
+        'playerMultiplier': '@'
+      }
     };
 
     return directive;
