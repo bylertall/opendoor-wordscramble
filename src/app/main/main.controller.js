@@ -6,10 +6,13 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($document, $timeout, wordService) {
+  function MainController($document, $timeout, $modal, wordService) {
     var vm = this;
 
     vm.wordService = wordService;
+
+    // help modal
+    vm.openHelp = openHelp;
 
     // use timeout to delay init
     // privdes nicer animation on start
@@ -39,5 +42,14 @@
         vm.wordService.checkUserInput(keyEvent);
       });
     });
+
+    // help modal
+    function openHelp() {
+      var modalInstance = $modal.open({
+        templateUrl: 'app/components/helpModal/help.html',
+        controller: 'HelpController as help',
+        size: 'md'
+      });
+    }
   }
 })();
