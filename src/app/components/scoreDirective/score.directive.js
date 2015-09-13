@@ -8,7 +8,6 @@
   function odScore() {
     var directive = {
       restrict: 'AE',
-      replace: true,
       templateUrl: 'app/components/scoreDirective/score.html',
 
       // score & multiplier values are given to attributes in od-score directive element
