@@ -14,12 +14,6 @@
     // help modal
     vm.openHelp = openHelp;
 
-    // use timeout to delay init
-    // privdes nicer animation on start
-    $timeout(function() {
-      vm.wordService.getNewWord();
-    }, 1000);
-
     // block delete key from triggering browser back
     // keydown event needed
     $document.bind('keydown', function(keyEvent) {
@@ -51,5 +45,11 @@
         size: 'md'
       });
     }
+
+    // use timeout to delay init
+    // privdes nicer animation on start
+    $timeout(function() {
+      vm.wordService.getNewWord();
+    }, 1000);
   }
 })();

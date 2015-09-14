@@ -7,7 +7,7 @@
 
   function odScorePanel() {
     var directive = {
-      restrict: 'AE',
+      restrict: 'E',
       templateUrl: 'app/components/scorePanel/scorePanel.html',
 
       // score & multiplier values are given to attributes in od-score directive element

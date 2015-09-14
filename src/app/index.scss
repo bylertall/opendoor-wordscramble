@@ -190,6 +190,30 @@ footer {
 }
 
 // animations
+.win-panel-outer.ng-hide-add {
+  transition: 150ms linear all;
+}
+
+.win-panel-outer.ng-hide-remove {
+  transition: 350ms linear all;
+}
+
+.win-panel-outer.ng-hide-add {
+  opacity: 1;
+}
+
+.win-panel-outer.ng-hide-remove {
+  opacity: 0;
+}
+
+.win-panel-outer.ng-hide-add-active {
+  /* the transition is defined in the active class */
+  opacity: 0;
+}
+
+.win-panel-outer.ng-hide-remove-active {
+  opacity: 1;
+}
 
 .view-fade.ng-enter {
   transition: 750ms linear all;
