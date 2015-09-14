@@ -3,17 +3,17 @@
 
   angular
     .module('opendoorWordScramble')
-    .directive('odScore', odScore);
+    .directive('odScorePanel', odScorePanel);
 
-  function odScore() {
+  function odScorePanel() {
     var directive = {
       restrict: 'AE',
-      templateUrl: 'app/components/scoreDirective/score.html',
+      templateUrl: 'app/components/scorePanel/scorePanel.html',
 
       // score & multiplier values are given to attributes in od-score directive element
       scope: {
-        'playerScore': '@',
-        'playerMultiplier': '@'
+        'playerScore': '@score',
+        'playerMultiplier': '@multiplier'
       }
     };
 

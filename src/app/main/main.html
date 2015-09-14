@@ -3,9 +3,6 @@
   <div class="row header text-center">
     <h1 class="title col-xs-12">Scrambled Words</h1>
 
-    <!-- Score -->
-    <od-score player-score="{{main.wordService.score}}" player-multiplier="{{main.wordService.multiplier}}"></od-score>
-
     <img class="scramble-logo" src="assets/scramble.png">
 
     <!-- Help button-->
@@ -13,6 +10,8 @@
   </div>
 
   <div class="content-container">
+    <!-- Score -->
+    <od-score-panel score="{{main.wordService.score}}" multiplier="{{main.wordService.multiplier}}"></od-score-panel>
 
     <!-- Panel to show on win -->
     <div class="view-fade win-panel-outer" ng-if="main.wordService.isWinner">
