@@ -7,11 +7,7 @@
 
   function odWinPanel() {
     var directive = {
-      restrict: 'E',
-      templateUrl: 'app/components/winPanel/winPanel.html',
-      scope: {
-        isWinner: '='
-      }
+      templateUrl: 'app/components/winPanel/winPanel.html'
     };
 
     return directive;

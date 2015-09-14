@@ -14,7 +14,7 @@
     <od-score-panel score="{{main.wordService.score}}" multiplier="{{main.wordService.multiplier}}"></od-score-panel>
 
     <!-- Panel to show on win -->
-    <od-win-panel is-winner="main.wordService.isWinner" class="win-panel"></od-win-panel>
+    <div od-win-panel ng-hide="!main.wordService.isWinner" class="win-panel"></div>
 
     <!-- Show user input -->
     <div class="word-container user-input">

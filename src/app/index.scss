@@ -190,31 +190,8 @@ footer {
 }
 
 // animations
-.win-panel-outer.ng-hide-add {
-  transition: 150ms linear all;
-}
 
-.win-panel-outer.ng-hide-remove {
-  transition: 350ms linear all;
-}
-
-.win-panel-outer.ng-hide-add {
-  opacity: 1;
-}
-
-.win-panel-outer.ng-hide-remove {
-  opacity: 0;
-}
-
-.win-panel-outer.ng-hide-add-active {
-  /* the transition is defined in the active class */
-  opacity: 0;
-}
-
-.win-panel-outer.ng-hide-remove-active {
-  opacity: 1;
-}
-
+/* General fade */
 .view-fade.ng-enter {
   transition: 750ms linear all;
   opacity:0;
@@ -230,6 +207,31 @@ footer {
 }
 .view-fade.ng-leave.ng-leave-active {
   opacity:0;
+}
+
+/* Win panel */
+.win-panel.ng-hide-add {
+  transition: 150ms linear all;
+}
+
+.win-panel.ng-hide-remove {
+  transition: 350ms linear all;
+}
+
+.win-panel.ng-hide-add {
+  opacity: 1;
+}
+
+.win-panel.ng-hide-remove {
+  opacity: 0;
+}
+
+.win-panel.ng-hide-add-active {
+  opacity: 0;
+}
+
+.win-panel.ng-hide-remove-active {
+  opacity: 1;
 }
 
 /* Fade for enter of scramble letters*/
