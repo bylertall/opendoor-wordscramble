@@ -37,9 +37,6 @@
         angular.copy([], factory.userInput);
 
         factory.word = data.word.toLowerCase();
-
-        console.log(factory.word);
-
         angular.copy(factory.word.toUpperCase().split(''), factory.wordArray);
         angular.copy(scramble(factory.wordArray), factory.scrambledArray);
 
